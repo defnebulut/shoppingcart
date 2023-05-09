@@ -5,7 +5,6 @@ import { useLocal } from "../hooks/useLocal"
 type ShoppingCartProviderProps={
     children: ReactNode
 }
-
 type CartItem={
     id:number
     quantity:number
@@ -41,7 +40,7 @@ export function ShoppingCartProvider({children}:
         function increaseQuantity(id:number){
             setCartItems(currItems=>{
                 if(currItems.find(item=> item.id ===id) ==null){
-                    return [...currItems,{id,quantity:1}]
+                   return [...currItems,{id,quantity:1}]
                 }else {
                     return currItems.map(item=>{
                         if(item.id ===id){

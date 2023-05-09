@@ -1,8 +1,9 @@
 import {Button,Container, Nav, Navbar as NavbarBs} from "react-bootstrap"
 import { NavLink } from "react-router-dom"
+import {userId} from "../pages/LoginRegister";
 import { useShoppingCart } from "../contx/shopcartcontext"
 export function Navbar() {
-
+  
     const{openCart,cartQuantity}= useShoppingCart()
     return <NavbarBs sticky="top" className="bg-white shadow-lg mb-3">
 
@@ -10,9 +11,9 @@ export function Navbar() {
             <Nav className="me-auto">
             <Nav.Link to="/" as={NavLink}>Home</Nav.Link>
             <Nav.Link to="/productlist" as={NavLink}>Product List</Nav.Link>
-            <Nav.Link to="/Cart" as={NavLink}>Cart</Nav.Link>
+            {userId && <Nav.Link as={NavLink} to={`/Cart/${userId}`}>Cart</Nav.Link>}
             </Nav>
-            <Button onClick={openCart}
+            {userId ? <Button onClick={openCart}
             style={{width:"3rem",height:"3rem",position:"relative"}} variant="outline-primary"
             className="rounded-circle">
                 <svg
@@ -31,7 +32,7 @@ export function Navbar() {
                 right: 0,
                 transform: "translate(25%, 25%)",
               }}>{cartQuantity}</div>
-            </Button>
+            </Button> : <Button>Login&Register</Button> }
      
         </Container>
     </NavbarBs>
